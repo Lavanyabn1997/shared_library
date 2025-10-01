@@ -1,5 +1,8 @@
 def call() {
     echo 'Building project...'
-    // Replace with your actual build tool
-    sh './gradlew build' // or 'mvn clean install' or 'npm install'
+    if (fileExists('./gradlew')) {
+        sh './gradlew build'
+    } else {
+        error "Gradle wrapper (./gradlew) not found. Make sure the correct repository is being cloned."
+    }
 }
